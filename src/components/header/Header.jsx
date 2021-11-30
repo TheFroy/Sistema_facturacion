@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 export default function Header() {
+  // eslint-disable-next-line
   const [numFactura, setNumFactura] = useState(Math.floor(Math.random() * (1000 - 100) + 100));
+  // eslint-disable-next-line
   const [numPedido, setNumPedido] = useState(Math.floor(Math.random() * (1000 - 100) + 100));
   const tiempoPasado = Date.now();
   const today = new Date(tiempoPasado);

@@ -7,10 +7,12 @@ export default function Factura() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line
     factura.map((articulo) => {
       var totalUnitario = parseFloat(articulo.precio) * parseFloat(articulo.cant);
       setTotal(total + totalUnitario);
     });
+    // eslint-disable-next-line
   }, [factura]);
   return (
     <>

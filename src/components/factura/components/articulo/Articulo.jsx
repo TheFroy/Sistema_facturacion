@@ -3,7 +3,7 @@ import trashSvg from "./assets/trashbid.svg";
 
 export default function Articulo({ articulo, factura, setFactura }) {
   const deleteHandler = (params) => {
-    const newFactura = factura.filter((art) => art.id != articulo.id);
+    const newFactura = factura.filter((art) => art.id !== articulo.id);
     setFactura(newFactura);
   };
   return (
