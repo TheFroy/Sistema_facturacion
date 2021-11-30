@@ -18,7 +18,7 @@ export default function Factura() {
     <>
       {showModal && <Modal setShowModal={setShowModal} factura={factura} setFactura={setFactura} />}
       <div className="container-fluid mt-4">
-        <div className="col-6 px-4 mb-3">
+        <div className=" px-4 mb-3">
           <button className="btn btn-primary" onClick={() => setShowModal(true)}>
             Agregar Producto
           </button>
@@ -48,7 +48,7 @@ export default function Factura() {
         <table className="table">
           <tbody>
             {factura.length > 0 && (
-              <tr className="border-bottom pt-4 float-end">
+              <tr className="border-bottom pt-2 float-end">
                 <td className="fs-4 text font-weight-bold">
                   Total: B/. {total.toFixed(2)}{" "}
                   <button className="btn btn-success ml-2">Pagar</button>
