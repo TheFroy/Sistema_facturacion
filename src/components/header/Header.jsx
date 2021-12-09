@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 export default function Header({ numFactura, numPedido }) {
   const tiempoPasado = Date.now();
   const today = new Date(tiempoPasado);
