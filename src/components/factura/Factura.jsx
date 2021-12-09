@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Articulo from "./components/articulo/Articulo";
 import Modal from "../modal/Modal";
-export default function Factura() {
+import ModalGenerico from "../modaGenerico/ModalGenerico";
+import Pagar from "../pagar/Pagar";
+import Envio from "../procesarEnvio/Envio";
+
+export default function Factura({ numFactura, numPedido, setNumFactura, setNumPedido }) {
   const [factura, setFactura] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showModalPagar, setShowModalPagar] = useState(false);
+  const [showModalProceso, setShowModalProceso] = useState(false);
+  const [modalData, setModalData] = useState(null);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -16,14 +23,49 @@ export default function Factura() {
   }, [factura]);
   return (
     <>
-      {showModal && <Modal setShowModal={setShowModal} factura={factura} setFactura={setFactura} />}
+      {showModal && (
+        <Modal
+          setShowModal={setShowModal}
+          factura={factura}
+          setFactura={setFactura}
+          articulo={modalData}
+        />
+      )}
+      {showModalPagar && (
+        <ModalGenerico setShowModal={setShowModalPagar}>
+          <Pagar
+            numFactura={numFactura}
+            numPedido={numPedido}
+            total={total}
+            setShowModalPagar={setShowModalPagar}
+            setShowModalProceso={setShowModalProceso}
+          />
+        </ModalGenerico>
+      )}
+      {showModalProceso && (
+        <ModalGenerico setShowModal={setShowModalProceso}>
+          <Envio
+            setFactura={setFactura}
+            setShowModal={setShowModalProceso}
+            setNumFactura={setNumFactura}
+            setNumPedido={setNumPedido}
+          />
+        </ModalGenerico>
+      )}
+
       <div className="container-fluid mt-4">
         <div className=" px-4 mb-3">
-          <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              setShowModal(true);
+              setModalData(null);
+            }}
+          >
             Agregar Producto
           </button>
         </div>
-        <table class="table text-center" style={{ maxHeight: "400px", overflowY: "scroll" }}>
+        <table className="table text-center" style={{ maxHeight: "400px", overflowY: "scroll" }}>
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -40,6 +82,10 @@ export default function Factura() {
                   articulo={articulo}
                   factura={factura}
                   setFactura={setFactura}
+                  setShowModal={setShowModal}
+                  setModalData={setModalData}
+                  total={total}
+                  setTotal={setTotal}
                 />
               );
             })}
@@ -51,7 +97,9 @@ export default function Factura() {
               <tr className="border-bottom pt-2 float-end">
                 <td className="fs-4 text font-weight-bold">
                   Total: B/. {total.toFixed(2)}{" "}
-                  <button className="btn btn-success ml-2">Pagar</button>
+                  <button className="btn btn-success ml-4" onClick={() => setShowModalPagar(true)}>
+                    Pagar
+                  </button>
                 </td>
               </tr>
             )}
