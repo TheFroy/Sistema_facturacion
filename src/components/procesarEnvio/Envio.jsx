@@ -20,13 +20,6 @@ function useInterval(callback, delay) {
 export default function Envio({ setShowModal, setFactura, setNumFactura, setNumPedido }) {
   const [counter, setCounter] = useState(0);
 
-  const textos = [
-    "Enviando copia de factura al departamento de compras",
-    "Enviando copia de factura - copia local",
-    "Enviando copia a sección de despacho de mercancía",
-    "Enviando factura al cliente",
-  ];
-
   useInterval(() => {
     if (counter < 120) {
       setCounter(counter + 10);
